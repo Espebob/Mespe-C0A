@@ -1,39 +1,39 @@
-// Coding Challenge 1 __Array Manipulation
+//coding Challenge 1 __Array Manipulation
 
-// import the prompt-sync module to enable the user input
+//import the prompt-sync module to enable the user input
 const prompt = require('prompt-sync')();
 
-// function to check for subarray with the target sum
+//function to check for subarray with the target sum
 const subArraySum = (array, target) => {
-    let start = 0; // initialize the start index of the current subarray
-    let currentSum = 0; // initialize the current sum of the subarray
-    let result = null;  // initialize the variable to store the result subarray
+    let start = 0;  //initialize the start index of the current subarray
+    let currentSum = 0; //initialize the current sum of the subarray
+    let result = null;  //initialize the variable to store the result subarray
  
-    // loop through each element in the array
+    //loop through each element in the array
     array.forEach((num, end) => {
-        currentSum += num; // add the current element to the current sum
+        currentSum += num; //add the current element to the current sum
 
-        // if the current sum is greater than the target, remove elements from the start to reduce the sum
+        //if the current sum is greater than the target, remove elements from the start to reduce the sum
         while (currentSum > target && start <= end) {
-            currentSum -= array[start]; // subtract the element at the start
-            start++; // move the start index to the right
+            currentSum -= array[start]; //subtract the element at the start
+            start++; //move the start index to the right
         }
 
         // check whether the current sum equals the target
         if (currentSum === target) {
-            result = array.slice(start, end + 1); // Store the subarray if sum equals target
+            result = array.slice(start, end + 1); //store the subarray if sum equals to the target
         }
     });
 
     return result;
 };
 
-// Get input from the user
+//get input from the user
 const inputArray = prompt('Enter array elements of your choice, and separate them by space: ');
 const array = inputArray.split(' ').map(Number);
 const target = Number(prompt('Enter the target sum: '));
 
-// Constraints validation
+//get constraints validation
 if (array.length < 1 || array.length > 100000) {
     console.log("Try again, the array must contain between 1 and 100,000 elements.");
     process.exit(1);
@@ -50,7 +50,7 @@ if (target < -1000000000 || target > 1000000000) {
     process.exit(1);
 }
 
-// measure the time complexity (execution time) and space complexity (memory usage)
+//measure the time complexity (execution time) and space complexity (memory usage)
 const startTime = process.hrtime.bigint();
 const initialMemory = process.memoryUsage().heapUsed;
 
@@ -59,11 +59,11 @@ const result = subArraySum(array, target);
 const endTime = process.hrtime.bigint();
 const finalMemory = process.memoryUsage().heapUsed;
 
-const executionTime = (endTime - startTime) / BigInt(1e6); // convert nanoseconds to milliseconds
-const memoryUsage = (finalMemory - initialMemory) / 1024; // convert bytes to kilobytes
+const executionTime = (endTime - startTime) / BigInt(1e6); //converted nanoseconds to milliseconds
+const memoryUsage = (finalMemory - initialMemory) / 1024; //converted bytes to kilobytes
 
 
-// display the result
+//displaying the results
 if (Array.isArray(result)) {
     console.log("true");
     console.log(`The subarray [${result.join(', ')}] sums up to ${target}, which is the target sum.`);
@@ -71,5 +71,5 @@ if (Array.isArray(result)) {
     console.log("false");
 }
 
-//console.log(`Time complexity: ${executionTime} ms`);
-//console.log(`Space complexity: ${memoryUsage} KB`)
+// console.log(`Execution time: ${executionTime} ms`);
+// console.log(`Memory usage: ${memoryUsage} KB`)

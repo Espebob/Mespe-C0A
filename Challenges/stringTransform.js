@@ -1,41 +1,93 @@
-// Coding Challenge 2 __String Transformation
+//coding Challenge 2 __String Transformation
 
-// Here's the updated problem statement with real-world word examples:
-// Problem Statement: 
+//import the prompt-sync module
+const prompt = require('prompt-sync')();
 
-//Given a string, transform it based on the following rules:
-// ● If the length of the string is divisible by 3, reverse the entire string.
-// ● If the length of the string is divisible by 5, replace each character with its ASCII code.
-// ● If the length of the string is divisible by both 3 and 5 (i.e., divisible by 15), perform
-// both operations in the order specified above.
+const transformString = (input) => {
+    //function to reverse a string
+    const reverseString = (str) => {
+        return str.split('').reverse().join('');
+    };
 
-// Example: Input: "Hamburger"
-// Output: "regrubmaH"
+    //function to replace each character with its ASCII code
+    const replaceWithASCII = (str) => {
+        return str.split('').map(char => char.charCodeAt(0)).join(' ');
+    };
 
-// Explanation: The length of the string is 9, which is divisible by 3 but not by 5 or 15.
+    // Check if the string contains only alphanumeric characters and spaces
+    const isValidString = /^[a-zA-Z0-9\s]+$/.test(input);
+    if (!isValidString) {
+        return { error: "Try again. String must contain only alphanumeric characters and spaces." };
+    }
 
-// Therefore, the string is reversed, resulting in "regrubmaH".
+    //checking if the length of the string is between 1 and 1000
+    const length = input.length;
+    if (length < 1 || length > 1000) {
+        return "Try again. The length of the string must be between 1 and 1000.";
+    }
 
-// Example: Input: "Pizza"
-// Output: "80 105 122 122 97"
-// Explanation: The length of the string is 5, which is divisible by 5 but not by 3 or 15.
-// Therefore, each character is replaced by its ASCII code, resulting in "80 105 122 122 97".
+    //measure the execution time
+    const startTime = process.hrtime.bigint();
 
-// Example: Input: "Chocolate Chip Cookie"
-// Output: "eikooCpihCetalocohC"
-// Explanation: The length of the string is 21, which is divisible by 3 but not by 5 or 15.
-// Therefore, the string is reversed, resulting in "eikooCpihCetalocohC".
+    //checking if the length of the string is divisible by 3, 5, or both
+    const divisibleBy3 = length % 3 === 0;
+    const divisibleBy5 = length % 5 === 0;
 
-// Constraints:
-// ● The string will only contain alphanumeric characters and spaces.
-// ● The length of the string will be between 1 and 1000.
+    let transformedString;
+    //transformations based on divisibility
+    if (divisibleBy3 && divisibleBy5) {
+        //if the length of the string is divisible by both 3 and 5, both operations are perfomed in order
+        const reversedString = reverseString(input);
+        transformedString = replaceWithASCII(reversedString);
+    } else if (divisibleBy3) {
+        //if the length of the string is divisible by 3, the entire string is revesed
+        transformedString = reverseString(input);
+    } else if (divisibleBy5) {
+        //if the length of the string is divisible by 5, each character is repleced with its ASCII code
+        transformedString = replaceWithASCII(input);
+    } else {
+        //if the length of the string is not divisible by 3 or 5, the original string is returned
+        transformedString = input;
+    }
 
-// Expected Time Complexity: O(n), where n is the length of the string. Expected Space
-// Complexity: O(n), where n is the length of the string.
+    //measure space complexity
+    const memoryUsage = process.memoryUsage().heapUsed;
 
-// Note: You can assume that the input will always be valid and within the specified
-// constraints. Your solution should handle all possible cases and return the transformed
-// string accordingly.
-// These examples use real-world words related to food to illustrate the transformations
-// applied based on the divisibility of the string length by 3, 5, and 15
+    //measure the execution time
+    const endTime = process.hrtime.bigint();
+    const executionTime = (endTime - startTime) / BigInt(1e6); //converting nanoseconds to milliseconds
 
+    return { transformedString, executionTime, memoryUsage };
+};
+
+
+//get input from the user
+const userInput = prompt('Enter a string of your choice: ');
+
+//validating the user input and applying transformations
+if (!userInput || userInput.trim() === '') {
+    console.log("Try again. Please enter a valid string.");
+} else {
+    const { transformedString, executionTime, memoryUsage } = transformString(userInput);
+    console.log(transformedString);
+
+        // Display explanations to the user interface
+        const length = userInput.length;
+        if (length % 3 === 0 && length % 5 !== 0) {
+            console.log(`The length of the string is ${length}, which is divisible by 3 but not by 5 or 15.`);
+            console.log(`Therefore, the string is reversed, resulting in "${transformedString}"`);
+        } else if (length % 5 === 0 && length % 3 !== 0) {
+            console.log(`The length of the string is ${length}, which is divisible by 5 but not by 3 or 15.`);
+            console.log(`Therefore, each character is replaced by its ASCII code, resulting in "${transformedString}"`);
+        } else if (length % 3 === 0 && length % 5 === 0) {
+            console.log(`The length of the string is ${length}, which is divisible by both 3 and 5 (15).`);
+            console.log(`Therefore, the string is reversed, and then each character is replaced by its ASCII code, resulting in "${transformedString}"`);
+        } else {
+            console.log(`The length of the string is ${length}, which is not divisible by 3 or 5.`);
+            console.log("Therefore, no transformation is applied.");
+        }
+        
+        // console.log(`Execution Time: ${executionTime} ms`);
+        // console.log(`Memory Usage: ${memoryUsage / 1024} KB`); //converted bytes to kilobytes
+    
+}
