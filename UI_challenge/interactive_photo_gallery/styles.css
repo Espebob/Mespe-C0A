@@ -1,0 +1,22 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+body{
+    display: flex;
+    justify-content: center; /*horizontally*/
+    align-items: center; /*vertically*/
+    height: 100vh; /*the body full viewport height*/
+    background-color: black;
+}
+
+.container{
+    width: 70%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
