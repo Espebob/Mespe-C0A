@@ -1,0 +1,15 @@
+{
+  "name": "coding_challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "array_manipulation.js",
+  "scripts": {
+    "start": "node array_manipulation.js"
+  },
+  "keywords": [],
+  "author": "Esperance Muhawenimana",
+  "license": "ISC",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
