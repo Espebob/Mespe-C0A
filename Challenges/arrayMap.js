@@ -1,29 +1,6 @@
 // Coding Challenge 1 __Array Manipulation
 
-// Problem Statement:
-
-// Given an array of integers and a target sum, determine if there exists a contiguous
-// subarray within the array that sums up to the target. Return true if such a subarray exists,
-// otherwise return false.
-
-// Example:
-// Input: arr = [4, 2, 7, 1, 9, 5], target = 17
-// Output: true
-
-// Explanation: The subarray [7, 1, 9] sums up to 17, which is equal to the target.
-
-// Constraints:
-
-// - The array will contain between 1 and 100,000 elements.
-// - The elements in the array and the target sum will be between -1,000,000,000 and
-// 1,000,000,000.
-
-// Expected Time Complexity: O(n), where n is the length of the array.
-// Expected Space Complexity: O(1).
-//
-
-
-// import the prompt-sync module
+// import the prompt-sync module to enable the user input
 const prompt = require('prompt-sync')();
 
 // function to check for subarray with the target sum
@@ -52,7 +29,7 @@ const subArraySum = (array, target) => {
 };
 
 // Get input from the user
-const inputArray = prompt('Enter the array elements separated by space: ');
+const inputArray = prompt('Enter array elements of your choice, and separate them by space: ');
 const array = inputArray.split(' ').map(Number);
 const target = Number(prompt('Enter the target sum: '));
 
@@ -89,7 +66,7 @@ const memoryUsage = (finalMemory - initialMemory) / 1024; // convert bytes to ki
 // display the result
 if (Array.isArray(result)) {
     console.log("true");
-    console.log(`The subarray [${result.join(', ')}] sums up to ${target}, which is equal to the target.`);
+    console.log(`The subarray [${result.join(', ')}] sums up to ${target}, which is the target sum.`);
 } else {
     console.log("false");
 }
