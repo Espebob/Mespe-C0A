@@ -3,8 +3,8 @@ COA Task force take home challenge
 
 # Coding Challenges
 
-This repository contains two coding challenges 
-and UI challenge for an interactive photo gallery: **String Transformation** and **Array Manipulation**. 
+This repository contains UI challenge for an interactive photo gallery and two coding challenges which are: 
+**String Transformation** and **Array Manipulation** 
 Each challenge is documented with detailed instructions for installation, usage, and contribution.
 
 ## Table of Contents
