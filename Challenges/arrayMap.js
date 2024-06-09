@@ -71,5 +71,5 @@ if (Array.isArray(result)) {
     console.log("false");
 }
 
-// console.log(`Execution time: ${executionTime} ms`);
-// console.log(`Memory usage: ${memoryUsage} KB`)
+console.log(`Execution time: ${executionTime} ms`);
+ console.log(`Memory usage: ${memoryUsage} KB`)
