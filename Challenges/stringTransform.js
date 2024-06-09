@@ -87,7 +87,7 @@ if (!userInput || userInput.trim() === '') {
             console.log("Therefore, no transformation is applied.");
         }
         
-         console.log(`Execution Time: ${executionTime} ms`);
-        console.log(`Memory Usage: ${memoryUsage / 1024} KB`); //converted bytes to kilobytes
+         console.log(`Time complexity: ${executionTime} ms`);
+        console.log(`Space complexity: ${memoryUsage / 1024} KB`); //converted bytes to kilobytes
     
 }
